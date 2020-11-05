@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "591580459146",
+    "firebase_url": "https://cat-attendees.firebaseio.com",
+    "project_id": "cat-attendees",
+    "storage_bucket": "cat-attendees.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591580459146:android:4e5685408291e9109c3d73",
+        "android_client_info": {
+          "package_name": "com.ashehata.catattendees"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591580459146-94a1tghn25svv6u6807emnc8egbtd38k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi2FKzCgw64Tss18H203Df1ipS23QlEN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "591580459146-94a1tghn25svv6u6807emnc8egbtd38k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

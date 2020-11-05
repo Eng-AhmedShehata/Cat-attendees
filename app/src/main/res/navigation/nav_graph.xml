@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/meetingFragment">
+
+    <fragment
+        android:id="@+id/meetingFragment"
+        android:name="com.ashehata.catattendees.meeting.MeetingFragment"
+        android:label="fragment_meeting"
+        tools:layout="@layout/fragment_meeting" >
+        <action
+            android:id="@+id/action_meetingFragment_to_addDayFragment"
+            app:destination="@id/addDayFragment"
+            app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_meetingFragment_to_addMemberFragment"
+            app:destination="@id/addMemberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addDayFragment"
+        android:name="com.ashehata.catattendees.addDay.AddMeetingFragment"
+        android:label="fragment_add_member"
+        tools:layout="@layout/fragment_add_day" />
+    <fragment
+        android:id="@+id/addMemberFragment"
+        android:name="com.ashehata.catattendees.addMember.AddMemberFragment"
+        android:label="AddMemberFragment" >
+        <argument
+            android:name="documentID"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
+
+</navigation>

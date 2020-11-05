@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ashehata.mycustomvg.RelativeLayoutLoading xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:show_loading="false"
+    app:container_alpha=".7"
+    android:id="@+id/rl_loading"
+    app:progress_color="@android:color/holo_blue_dark"
+    tools:context=".addDay.AddMeetingFragment">
+
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       >
+       <EditText
+           android:id="@+id/et_topic"
+           android:layout_marginTop="4dp"
+           android:layout_marginEnd="4dp"
+           android:layout_marginStart="4dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:hint="Topic"/>
+
+       <RadioGroup
+           android:id="@+id/rg_type"
+           android:layout_marginTop="4dp"
+           android:layout_marginEnd="4dp"
+           android:layout_marginStart="4dp"
+           android:gravity="center"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:checkedButton="@id/rb_offline"
+           >
+           <RadioButton
+               android:id="@+id/rb_offline"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Offline"/>
+
+           <RadioButton
+               android:layout_marginStart="12dp"
+               android:id="@+id/rb_online"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Online"/>
+       </RadioGroup>
+
+       <Spinner
+           android:id="@+id/spinner_places"
+           android:layout_marginTop="4dp"
+           android:layout_marginEnd="4dp"
+           android:layout_marginStart="4dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           />
+
+       <Button
+           android:layout_gravity="center"
+           android:id="@+id/btn_add_day"
+           android:layout_marginTop="4dp"
+           android:layout_marginEnd="4dp"
+           android:layout_marginStart="4dp"
+           android:layout_width="wrap_content"
+           android:text="Add"
+           android:layout_height="wrap_content"
+           />
+
+   </LinearLayout>
+</com.ashehata.mycustomvg.RelativeLayoutLoading>
