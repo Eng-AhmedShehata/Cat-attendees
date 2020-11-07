@@ -63,7 +63,7 @@ class AddMeetingFragment : Fragment() {
 
             ValidateME.checkAllValidation(
                 listOf(
-                    ValidateME.validateCustom("[a-zA-Z]{3,}", topic),
+                    ValidateME.validateCustom("[a-zA-Z\\s]{3,}", topic),
                 ),
                 onValidationResult = object : ValidateME.OnValidationResult {
                     override fun onSuccess() {
