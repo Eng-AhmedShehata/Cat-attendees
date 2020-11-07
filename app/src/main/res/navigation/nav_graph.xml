@@ -25,12 +25,12 @@
         tools:layout="@layout/fragment_add_day" />
     <fragment
         android:id="@+id/addMemberFragment"
-        android:name="com.ashehata.catattendees.addMember.AddMemberFragment"
+        android:name="com.ashehata.catattendees.member.MemberFragment"
         android:label="AddMemberFragment" >
         <argument
             android:name="documentID"
             app:argType="string"
-            android:defaultValue='""' />
+            android:defaultValue="" />
     </fragment>
 
 </navigation>

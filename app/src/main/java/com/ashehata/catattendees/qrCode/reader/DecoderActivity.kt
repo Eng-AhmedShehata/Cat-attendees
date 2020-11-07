@@ -68,8 +68,8 @@ class DecoderActivity : AppCompatActivity(), QRCodeReaderView.OnQRCodeReadListen
 
         qrdecoderview.setQRDecodingEnabled(false)
         val map = mutableMapOf<String, Any>()
-        map["name"] = obj.memberName
-        map["level"] = obj.memberLevel
+        map["name"] = obj.name
+        map["level"] = obj.level
 
         val dialog = showProgressDialog()
         documentID?.let {

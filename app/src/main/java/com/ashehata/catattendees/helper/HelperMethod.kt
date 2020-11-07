@@ -40,7 +40,7 @@ fun Activity.hideKeypad() {
 }
 
 fun Activity.generateQr(memberName: String, memberLevel: String): Bitmap? {
-    val member = Member(memberName = memberName, memberLevel = memberLevel)
+    val member = Member(name = memberName, level = memberLevel)
     val memberJson = Gson().toJson(member)
     var bitmap: Bitmap? = null
 

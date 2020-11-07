@@ -1,6 +1,11 @@
 package com.ashehata.catattendees.qrCode.generator
 
+import com.google.gson.annotations.SerializedName
+
+
 data class Member(
-    val memberName: String,
-    val memberLevel: String,
+    @SerializedName("name")
+    val name: String = "",
+    @SerializedName("level")
+    val level: String = "",
 )
