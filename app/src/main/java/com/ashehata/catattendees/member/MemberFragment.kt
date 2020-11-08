@@ -9,6 +9,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.ashehata.catattendees.R
+import com.ashehata.catattendees.databinding.FragmentAddMemberBinding
+import com.ashehata.catattendees.databinding.FragmentMeetingBinding
 import com.ashehata.catattendees.helper.*
 import com.ashehata.catattendees.meeting.MeetingDay
 import com.ashehata.catattendees.meeting.getDayInfo
@@ -26,6 +28,7 @@ import javax.inject.Inject
 class MemberFragment : Fragment() {
 
     private lateinit var firebaseFirestore: FirebaseFirestore
+    private var binding: FragmentAddMemberBinding? = null
 
     @Inject
     lateinit var memberAdapter: MemberAdapter
@@ -36,9 +39,9 @@ class MemberFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        binding = FragmentAddMemberBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_member, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,8 +53,10 @@ class MemberFragment : Fragment() {
     }
 
     private fun setupRv() {
-        rv_members.adapter = memberAdapter
-        rv_members.setHasFixedSize(true)
+        binding?.rvMembers?.apply {
+            adapter = memberAdapter
+            setHasFixedSize(true)
+        }
     }
 
     private fun displayMembers(documentID: String) {
@@ -67,7 +72,7 @@ class MemberFragment : Fragment() {
                     for (document in task.result!!) {
                         data.add(document.toObject(Member::class.java))
                     }
-                    tv_total.append("${data.size}")
+                    binding?.tvTotal?.append("${data.size}")
                     memberAdapter.submitList(data)
                 } else {
                     Logger.e("Failed", "Error getting documents.")
@@ -77,7 +82,7 @@ class MemberFragment : Fragment() {
     }
 
     private fun setAdd(documentID: String) {
-        add_member.setOnClickListener {
+        binding?.addMember?.setOnClickListener {
             if (requireActivity().checkCameraPermission()) {
                 //main logic or main code
                 startActivity(Intent(requireContext(), DecoderActivity::class.java).apply {
@@ -87,6 +92,11 @@ class MemberFragment : Fragment() {
                 requireActivity().requestPermission();
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
 }

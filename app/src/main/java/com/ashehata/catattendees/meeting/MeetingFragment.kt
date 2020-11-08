@@ -8,6 +8,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ashehata.catattendees.R
+import com.ashehata.catattendees.databinding.FragmentAddDayBinding
+import com.ashehata.catattendees.databinding.FragmentMeetingBinding
 import com.ashehata.catattendees.helper.Logger
 import com.ashehata.catattendees.helper.MEETING_COLLECTION
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,6 +22,7 @@ import javax.inject.Inject
 class MeetingFragment : Fragment(), MeetingAdapter.OnDay {
 
     private lateinit var firebaseFirestore: FirebaseFirestore
+    private var binding: FragmentMeetingBinding? = null
 
     @Inject
     lateinit var meetingAdapter: MeetingAdapter
@@ -28,8 +31,9 @@ class MeetingFragment : Fragment(), MeetingAdapter.OnDay {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentMeetingBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_meeting, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +48,7 @@ class MeetingFragment : Fragment(), MeetingAdapter.OnDay {
             .orderBy("dateMilliSecond", Query.Direction.DESCENDING)
             .get()
             .addOnCompleteListener { task ->
-                pb_loading_days.isVisible = false
+                binding?.pbLoadingDays?.isVisible = false
                 if (task.isSuccessful) {
                     val data = mutableListOf<MeetingDay>()
                     for (document in task.result!!) {
@@ -57,17 +61,20 @@ class MeetingFragment : Fragment(), MeetingAdapter.OnDay {
 
                 }
             }.addOnFailureListener {
-                pb_loading_days.isVisible = false
+                binding?.pbLoadingDays?.isVisible = false
             }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding = null
     }
 
     private fun setFab() {
-        rv_meetings_days.adapter = meetingAdapter
-        rv_meetings_days.setHasFixedSize(true)
+        binding?.rvMeetingsDays?.apply {
+            adapter = meetingAdapter
+            setHasFixedSize(true)
+        }
         meetingAdapter.setUpClicked(this)
 
         fab_add_day.setOnClickListener {

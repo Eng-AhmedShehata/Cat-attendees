@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ashehata.catattendees.R
+import com.ashehata.catattendees.databinding.FragmentAddDayBinding
+import com.ashehata.catattendees.databinding.FragmentAddMemberBinding
 import com.ashehata.catattendees.helper.Logger
 import com.ashehata.catattendees.helper.MEETING_COLLECTION
 import com.ashehata.catattendees.helper.showToast
@@ -25,13 +27,15 @@ import java.util.*
 class AddMeetingFragment : Fragment() {
 
     private lateinit var firebaseFirestore: FirebaseFirestore
+    private var binding: FragmentAddDayBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentAddDayBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_day, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,8 +62,8 @@ class AddMeetingFragment : Fragment() {
     }
 
     private fun setAddButton() {
-        btn_add_day.setOnClickListener {
-            val topic = et_topic.text.toString()
+        binding?.btnAddDay?.setOnClickListener {
+            val topic = binding?.etTopic?.text.toString()
 
             ValidateME.checkAllValidation(
                 listOf(
@@ -85,10 +89,10 @@ class AddMeetingFragment : Fragment() {
 
     private fun saveData() {
         // show loading state
-        rl_loading.loadingProgress(true)
+        binding?.rlLoading?.loadingProgress(true)
 
-        val topic = et_topic.text.toString()
-        val type = when (rg_type.checkedRadioButtonId) {
+        val topic = binding?.etTopic?.text.toString()
+        val type = when (binding?.rgType?.checkedRadioButtonId) {
             R.id.rb_offline -> MeetingType.Offline
             R.id.rb_online -> MeetingType.Online
             else -> MeetingType.Unknown
@@ -111,7 +115,7 @@ class AddMeetingFragment : Fragment() {
         firebaseFirestore.collection(MEETING_COLLECTION)
             .add(newDay)
             .addOnSuccessListener { documentReference ->
-                rl_loading.loadingProgress(false)
+                binding?.rlLoading?.loadingProgress(false)
                 requireContext().showToast("Success")
                 findNavController().popBackStack()
                 Logger.i(
@@ -119,10 +123,15 @@ class AddMeetingFragment : Fragment() {
                 )
             }
             .addOnFailureListener { e ->
-                rl_loading.loadingProgress(false)
+                binding?.rlLoading?.loadingProgress(false)
                 requireContext().showToast("Failed $e")
                 Logger.e("failed", "Error adding document $e")
             }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
 }
