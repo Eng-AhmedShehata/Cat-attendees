@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 
 data class Member(
-    @SerializedName("name")
+    @SerializedName("memberName")
     val name: String = "",
-    @SerializedName("level")
+    @SerializedName("memberLevel")
     val level: String = "",
 )
